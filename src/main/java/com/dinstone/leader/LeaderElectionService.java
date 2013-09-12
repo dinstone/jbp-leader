@@ -127,7 +127,7 @@ public class LeaderElectionService {
         clear();
 
         try {
-            connection();
+            connect();
 
             regist();
 
@@ -167,7 +167,7 @@ public class LeaderElectionService {
         }
     }
 
-    private void connection() throws InterruptedException, KeeperException {
+    private void connect() throws InterruptedException, KeeperException {
         if (this.zooKeeper == null || !zooKeeper.getState().isAlive()) {
             final CountDownLatch connectSingal = new CountDownLatch(1);
             try {
