@@ -53,7 +53,7 @@ public class LeaderElectionServiceTest {
         String hostport = "172.17.20.210:2181";
         // zooKeeper = new ZooKeeper(hostport, 30000, defWatcher);
 
-        LeaderElectionService le = new LeaderElectionService(hostport, 3000);
+        LeaderElectionService le = new LeaderElectionService(hostport, 1000);
         le.setLeaderElectionAware(new LeaderElectionAware() {
 
             public void onLeader(LeaderOffer leaderOffer) {
@@ -75,7 +75,7 @@ public class LeaderElectionServiceTest {
 
         le.start();
 
-        Thread.sleep(30000);
+        Thread.sleep(3000000);
 
         le.stop();
     }

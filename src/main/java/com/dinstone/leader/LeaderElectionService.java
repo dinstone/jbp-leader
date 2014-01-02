@@ -174,12 +174,14 @@ public class LeaderElectionService {
                 this.zooKeeper = new ZooKeeper(quorumServers, sessionTimeout, new Watcher() {
 
                     public void process(WatchedEvent event) {
-                        LOG.debug("Received zookeeper event, type={}, state={}", event.getType(), event.getState());
-                        if (KeeperState.SyncConnected == event.getState()) {
-                            connectSingal.countDown();
-                        } else if (KeeperState.Expired == event.getState()) {
-                            LOG.debug("Session is expired, need to redo the election process");
-                            elect();
+                        LOG.debug("Received zookeeper event, {}", event.toString());
+                        if (event.getPath() == null) {
+                            if (KeeperState.SyncConnected == event.getState()) {
+                                connectSingal.countDown();
+                            } else if (KeeperState.Expired == event.getState()) {
+                                LOG.debug("Session is expired, need to redo the election process");
+                                elect();
+                            }
                         }
                     }
                 });

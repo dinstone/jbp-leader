@@ -51,7 +51,7 @@ public class ZookeeperTest {
                 //
                 // };
                 //
-                String hostport = "172.17.20.210:2181";
+                String hostport = "127.0.0.1:2181";
                 // zooKeeper = new ZooKeeper(hostport, 30000, defWatcher);
 
                 LeaderElectionService le = new LeaderElectionService(hostport, 3000, "C-" + index);
